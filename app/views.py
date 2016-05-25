@@ -1,10 +1,12 @@
 from flask import render_template, flash, redirect, g, url_for, session, request
 from app import app, db
-from .forms import LoginForm
+from .forms import LoginForm, EditForm
 
 from app import lm, models
 from .models import User
 from flask.ext.login import login_user, current_user, logout_user, login_required
+
+from datetime import datetime
 
 
 @app.route('/')
@@ -49,8 +51,8 @@ def login():
         new_user = models.User(account=form.account.data, password=form.password.data)
         db.session.add(new_user)
         db.session.commit()
-        flash('Login Successed! Your account is"' + form.account.data + '",remember me =' + str(form.remember_me.data))
-        # g.user=new_user
+        flash('Login Successed ! Your account is"' + form.account.data + '",remember me =' + str(form.remember_me.data))
+        g.user = new_user
         login_user(new_user)
         return redirect('index')
     return render_template("login.html", title='Sign in', form=form)
@@ -66,6 +68,34 @@ def logout():
     logout_user()
     return redirect('/index')
 
+
+@app.route('/user/<account>')
+@login_required
+def user(account):
+    user = User.query.filter_by(account=account).first()
+    if user == None:
+        flash('User ' + account + " not found.")
+        return redirect('/index')
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
+
+
+@app.route('/edit', methods=['GET', 'POST'])
+@login_required
+def edit():
+    form = EditForm()
+    if form.validate_on_submit():
+        g.user.about_me = form.about_me.data
+        db.session.add(g.user)
+        db.session.commit()
+        flash("Your changes have been saved.")
+        return redirect(url_for('edit'))
+    else:
+        form.about_me.data = g.user.about_me
+    return render_template('edit.html', form=form)
 
 # @oid.after_login
 # def after_login(resp):
@@ -91,3 +121,7 @@ def logout():
 @app.before_request
 def before_request():
     g.user = current_user
+    if g.user.is_authenticated():
+        g.user.last_seen = datetime.utcnow()
+        db.session.add(g.user)
+        db.session.commit()
