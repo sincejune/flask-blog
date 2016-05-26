@@ -18,7 +18,7 @@ def hello_world():
 @app.route('/index', methods=['GET', 'POST'])
 @app.route('/index/<int:page>', methods=['GET', 'POST'])
 @login_required
-def hello(page=1):
+def index(page=1):
     user = g.user
     form = PostForm()
     if form.validate_on_submit():
@@ -116,7 +116,7 @@ def follow(account):
     user = User.query.filter_by(account=account).first()
     if user is None:
         flash('User %s not found.' % account)
-        return redirect(url_for('index'))
+        return redirect('/index')
     if user == g.user:
         flash('You can\'t follow yourself!')
         return redirect(url_for('user', account=account))
@@ -136,7 +136,7 @@ def unfollow(account):
     user = User.query.filter_by(account=account).first()
     if user is None:
         flash('User %s not found.' % account)
-        return redirect(url_for('index'))
+        return redirect('/index')
     if user == g.user:
         flash('You can\'t unfollow yourself!')
         return redirect(url_for('user', account=account))
