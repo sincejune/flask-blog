@@ -13,3 +13,7 @@ class LoginForm(Form):
 
 class EditForm(Form):
     about_me = TextAreaField('about_me', validators=[DataRequired()])
+
+
+class PostForm(Form):
+    post = StringField('post', validators=[DataRequired()])

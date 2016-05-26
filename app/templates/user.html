@@ -19,7 +19,7 @@
         </tr>
     </table>
     <hr>
-    {% for post in posts %}
+    {% for post in posts.items %}
         {% include 'post.html' %}
     {% endfor %}
 {% endblock %}

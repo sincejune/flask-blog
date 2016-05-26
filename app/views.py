@@ -1,12 +1,13 @@
 from flask import render_template, flash, redirect, g, url_for, session, request
 from app import app, db
-from .forms import LoginForm, EditForm
+from .forms import LoginForm, EditForm, PostForm
 
 from app import lm, models
-from .models import User
+from .models import User, Post
 from flask.ext.login import login_user, current_user, logout_user, login_required
 
 from datetime import datetime
+from config import POSTS_PER_PAGE
 
 
 @app.route('/')
@@ -14,21 +15,20 @@ def hello_world():
     return 'Hello World!'
 
 
-@app.route('/index')
+@app.route('/index', methods=['GET', 'POST'])
+@app.route('/index/<int:page>', methods=['GET', 'POST'])
 @login_required
-def hello():
+def hello(page=1):
     user = g.user
-    posts = [  # fake array of posts
-        {
-            'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template("index.html", title="Home", user=user, posts=posts)
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user)
+        db.session.add()
+        db.session.commit()
+        flash('Your post is now live!')
+        return redirect(url_for('index'))
+    posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+    return render_template("index.html", title="Home", user=user, form=form, posts=posts)
 
 
 # remove openid
@@ -73,16 +73,14 @@ def logout():
 
 
 @app.route('/user/<account>')
+@app.route('/user/<account>/<int:page>')
 @login_required
-def user(account):
+def user(account, page=1):
     user = User.query.filter_by(account=account).first()
     if user == None:
         flash('User ' + account + " not found.")
         return redirect('/index')
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
     return render_template('user.html', user=user, posts=posts)
 
 
