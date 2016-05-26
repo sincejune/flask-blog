@@ -53,6 +53,9 @@ def login():
         db.session.commit()
         flash('Login Successed ! Your account is"' + form.account.data + '",remember me =' + str(form.remember_me.data))
         g.user = new_user
+        # 使自己成为自己的关注者
+        db.session.add(g.user.follow(g.user))
+        db.session.commit()
         login_user(new_user)
         return redirect('index')
     return render_template("login.html", title='Sign in', form=form)
@@ -107,13 +110,6 @@ def internal_error(error):
 def interal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
-
-
-@app.after_login
-def after_login():
-    # 使自己成为自己的关注者
-    db.session.add(g.user.follow(g.user))
-    db.session.commit()
 
 
 @app.route('/follow/<account>')

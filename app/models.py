@@ -41,7 +41,7 @@ class User(db.Model):
 
     def unfollow(self, user):
         if self.is_following(user):
-            self.is_followed.remove(user)
+            self.followed.remove(user)
             return self
 
     def is_following(self, user):
