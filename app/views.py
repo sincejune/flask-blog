@@ -26,7 +26,7 @@ def hello(page=1):
         db.session.add()
         db.session.commit()
         flash('Your post is now live!')
-        return redirect(url_for('index'))
+        return redirect('/index')
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     return render_template("index.html", title="Home", user=user, form=form, posts=posts)
 
@@ -57,7 +57,7 @@ def login():
         db.session.add(g.user.follow(g.user))
         db.session.commit()
         login_user(new_user)
-        return redirect('index')
+        return redirect('/index')
     return render_template("login.html", title='Sign in', form=form)
 
 
