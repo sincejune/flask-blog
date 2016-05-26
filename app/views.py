@@ -108,6 +108,53 @@ def interal_error(error):
     db.session.rollback()
     return render_template('500.html'), 500
 
+
+@app.after_login
+def after_login():
+    # 使自己成为自己的关注者
+    db.session.add(g.user.follow(g.user))
+    db.session.commit()
+
+
+@app.route('/follow/<account>')
+@login_required
+def follow(account):
+    user = User.query.filter_by(account=account).first()
+    if user is None:
+        flash('User %s not found.' % account)
+        return redirect(url_for('index'))
+    if user == g.user:
+        flash('You can\'t follow yourself!')
+        return redirect(url_for('user', account=account))
+    u = g.user.follow(user)
+    if u is None:
+        flash('Cannot follow ' + account + '.')
+        return redirect(url_for('user', account=account))
+    db.session.add(u)
+    db.session.commit()
+    flash('You are now following ' + account + '!')
+    return redirect(url_for('user', account=account))
+
+
+@app.route('/unfollow/<account>')
+@login_required
+def unfollow(account):
+    user = User.query.filter_by(account=account).first()
+    if user is None:
+        flash('User %s not found.' % account)
+        return redirect(url_for('index'))
+    if user == g.user:
+        flash('You can\'t unfollow yourself!')
+        return redirect(url_for('user', account=account))
+    u = g.user.unfollow(user)
+    if u is None:
+        flash('Cannot unfollow ' + account + '.')
+        return redirect(url_for('user', account=account))
+    db.session.add(u)
+    db.session.commit()
+    flash('You have stopped following ' + account + '.')
+    return redirect(url_for('user', account=account))
+
 # @oid.after_login
 # def after_login(resp):
 #     if resp.email is None or resp.email == "":
