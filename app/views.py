@@ -10,11 +10,12 @@ from datetime import datetime
 from config import POSTS_PER_PAGE
 
 
+@app.route('/hello')
+def hello():
+    return render_template("hello.html")
+
+
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
-
-
 @app.route('/index', methods=['GET', 'POST'])
 @app.route('/index/<int:page>', methods=['GET', 'POST'])
 @login_required
@@ -23,7 +24,7 @@ def index(page=1):
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user)
-        db.session.add()
+        db.session.add(post)
         db.session.commit()
         flash('Your post is now live!')
         return redirect('/index')
