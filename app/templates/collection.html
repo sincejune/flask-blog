@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Hello,{{ user.account }}!</h1>
+    <form action="" method="post" name="post">
+        {{ form.hidden_tag() }}
+        <table>
+            <tr>
+                <td>Say something:</td>
+                <td>{{ form.title(size = 30, maxlength = 140) }}</td>
+                <td>{{ form.description(size=30, maxlength=140) }}</td>
+                <td>
+                    {% for error in form.errors.post %}
+                        <span style="color: red;">[{{ error }}]</span><br>
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Post!"></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+    {% for collection in collections %}
+        <table>
+            <tr valign="top">
+                <td><img src="{{ collection.owner.avatar(50) }}"></td>
+                <p>
+                    <a href="{{ url_for('user', account = collection.owner.account) }}">{{ collection.owner.account }}</a>
+                <p> {{ momentjs(collection.timestamp).fromNow() }}:</p>
+                <p><strong>{{ collection.title }}</strong></p>
+                {% if collection.description %}
+                    <p><strong>{{ collection.description }}</strong></p>
+                {% endif %}
+            </tr>
+        </table>
+    {% endfor %}
+{% endblock %}

@@ -1,9 +1,9 @@
 from flask import render_template, flash, redirect, g, url_for, session, request
 from app import app, db
-from .forms import LoginForm, EditForm, PostForm
+from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm
 
 from app import lm, models
-from .models import User, Post
+from .models import User, Post, Collection
 from flask.ext.login import login_user, current_user, logout_user, login_required
 
 from datetime import datetime
@@ -56,6 +56,10 @@ def login():
         g.user = new_user
         # 使自己成为自己的关注者
         db.session.add(g.user.follow(g.user))
+        # 触发器，创建新用户的时候添加第一条博客
+        p = models.Post(title='My first post!', body='My first post!!', timestamp=datetime.utcnow(), user_id=g.user.id,
+                        update=0)
+        db.session.add(p)
         db.session.commit()
         login_user(new_user)
         return redirect('/index')
@@ -149,6 +153,53 @@ def unfollow(account):
     db.session.commit()
     flash('You have stopped following ' + account + '.')
     return redirect(url_for('user', account=account))
+
+
+@app.route('/collection', methods=['GET', 'POST'])
+@login_required
+def collection():
+    user = g.user
+    form = CollectionForm()
+    if form.validate_on_submit():
+        collection = Collection(title=form.title.data, description=form.description.data, owner=g.user)
+        db.session.add(collection)
+        db.session.commit()
+        flash('Your Collection is now live!')
+        return redirect(url_for('collection'))
+    collections = g.user.own_collections()
+    return render_template("collection.html", title="Collection", user=user, form=form, collections=collections)
+
+
+@app.route('/favorite/<collection>', methods=['GET', 'POST'])
+@app.route('/favorite/<collection>/<int:page>', methods=['GET', 'POST'])
+@login_required
+def favorite(collection, page=1):
+    posts = collection.within_posts().paginate(page, POSTS_PER_PAGE, False)
+    return render_template("index.html", title="Home", user=user, posts=posts)
+
+
+@app.route('/star/<post>/<user>', methods=['GET', 'POST'])
+@login_required
+def star(post, user):
+    collections = Collection.query.filter_by(user_id=user).all()
+    form = StarForm()
+    form.star.choices = [(collection.id, collection.title) for collection in collections]
+    # print(form.is_submitted())
+    # print(form.validate())
+    if form.validate_on_submit():
+        # print(1)
+        print(form.star.data)
+        c = Collection.query.filter_by(id=form.star.data).first()
+        p = Post.query.filter_by(id=post).first()
+        c.total += 1
+        c.contents.append(p)
+        db.session.add(c)
+        # db.session.add(c.coddntain(p))
+        db.session.commit()
+        # else:?S?
+        # print(2)
+    return render_template('star.html', title='star', user=user, collections=collections, post=post, form=form)
+
 
 # @oid.after_login
 # def after_login(resp):

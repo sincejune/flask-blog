@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<form action="" method="post" name="post">
+    {{ form.hidden_tag() }}
+    <table>
+        <tr>
+            {#                {% for subfield in form.starx %}#}
+            {#                <tr>#}
+            {#                 <td>{{ subfield }}</td>#}
+            {#                <td>{{ subfield.label }}</td>#}
+            {#                </tr>#}
+            {#                    {% endfor %}#}
+            <td>{{ form.star }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Add!"></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

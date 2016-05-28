@@ -1,7 +1,7 @@
 # 创建表单
 
 from flask.ext.wtf import Form
-from wtforms import StringField, BooleanField, TextAreaField
+from wtforms import StringField, BooleanField, TextAreaField, RadioField
 from wtforms.validators import DataRequired
 
 
@@ -17,3 +17,12 @@ class EditForm(Form):
 
 class PostForm(Form):
     post = StringField('post', validators=[DataRequired()])
+
+
+class CollectionForm(Form):
+    title = StringField('collection', validators=[DataRequired()])
+    description = StringField("description", validators=[])
+
+
+class StarForm(Form):
+    star = RadioField('star', coerce=int)
