@@ -5,6 +5,7 @@
     <script src="/static/js/jquery-2.2.4.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/moment.min.js"></script>
+
     <link rel="stylesheet" href="/static/app/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% if title %}
@@ -25,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/index">MiniBlog</a>
+            <a class="navbar-brand" href="/index">属于你的博客</a>
         </div>
 
 
@@ -37,9 +38,9 @@
                         <a href="{{ url_for('user', account = g.user.account) }}">Your Profile<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="active">
-                            <a href="{{ url_for('logout') }}">Logout<span class="sr-only">(current)</span></a></li>
+                            <a href="{{ url_for('logout') }}">退出<span class="sr-only">(current)</span></a></li>
                     {% else %}
-                        <a href="{{ url_for('login') }}">Login<span class="sr-only">(current)</span></a></li>
+                        <a href="{{ url_for('login') }}">登录<span class="sr-only">(current)</span></a></li>
                     {% endif %}
                 {#                        about 页面
                 <a href="?">#}

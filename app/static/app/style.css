@@ -3,7 +3,6 @@
 }
 
 .bg {
-    /*background: url(http://ww4.sinaimg.cn/large/a15b4afegw1eupvktwmrwg20av064gu0);*/
     background: url(http://img9.dzdwl.com/img/4854aacef1.jpg);
     background-size: cover;
     position: fixed;
@@ -34,27 +33,49 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-.put {
-    position: relative;
-    left: 700px;
+/*.put {*/
+/*position: relative;*/
+/*left: 700px;*/
+/*}*/
+
+/*.put1 {*/
+/*position: relative;*/
+/*left: 40%;*/
+/*font-size: 20px;*/
+/*font-family: serif;*/
+/*}*/
+
+/*.put2 {*/
+/*position: relative;*/
+/*left: 40%;*/
+/*font-size: 15px;*/
+/*}*/
+
+/*.put3 {*/
+/*position: relative;*/
+/*left: 40%;*/
+/*font-size: 40px;*/
+/*font-family: italic;*/
+/*}*/
+p span input {
+    width: 257px;
 }
 
-.put1 {
-    position: relative;
-    left: 40%;
-    font-size: 20px;
-    font-family: serif;
+div .login_img {
+    width: 806px;
+    float: left;
+    margin-left: 197px;
+    height: 600px;
+    /*margin-top: px;*/
+    /*background-image: url(../img/bgimg.jpg)  ;*/
+    /*background-repeat: no-repeat;*/
 }
 
-.put2 {
-    position: relative;
-    left: 40%;
-    font-size: 15px;
+div div img {
+    height: 900px;
+    width: 79%;
 }
 
-.put3 {
-    position: relative;
-    left: 40%;
-    font-size: 40px;
-    font-family: italic;
+a:hover {
+    text-decoration: none;
 }

@@ -108,8 +108,8 @@ class Collection(db.Model):
     total = db.Column('total', db.Integer, default=0)
     # 从页面上阻止被多次收藏，如果已经收藏过了，符号改变，让他不能再收藏。
 
-    ###IMPORTANT
-    ###这里第四行不是secondaryjoin=(favorites.c.post_id == Post.id)因为sacondaryjoin链接右边的表的映射关系不是post_id——collection_id
+    # ## IMPORTANT
+    # ## 这里第四行不是secondaryjoin=(favorites.c.post_id == Post.id)因为sacondaryjoin链接右边的表的映射关系不是post_id——collection_id
     contents = db.relationship('Post',
                                secondary=favorites,
                                primaryjoin=(favorites.c.collection_id == id),
@@ -133,7 +133,7 @@ class Collection(db.Model):
             favorites.c.collection_id == self.id).order_by(Post.timestamp.desc())
 
     def __repr__(self):
-        return '<Collection %r>' % self.total
+        return '%r' % self.id
 
 # class Comment(db.Model):
 #     id = db.Column('id', db.Integer, primary_key=True)

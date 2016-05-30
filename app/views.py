@@ -174,8 +174,9 @@ def collection():
 @app.route('/favorite/<collection>/<int:page>', methods=['GET', 'POST'])
 @login_required
 def favorite(collection, page=1):
-    posts = collection.within_posts().paginate(page, POSTS_PER_PAGE, False)
-    return render_template("index.html", title="Home", user=user, posts=posts)
+    c = Collection.query.filter_by(id=int(collection)).first()
+    posts = c.within_posts().paginate(page, POSTS_PER_PAGE, False)
+    return render_template("favorite.html", title="Home", user=user, posts=posts)
 
 
 @app.route('/star/<post>/<user>', methods=['GET', 'POST'])

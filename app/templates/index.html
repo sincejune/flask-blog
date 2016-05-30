@@ -1,33 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1 class="put3">Hello,{{ user.account }}!</h1>
+    <div style="text-align: center;">
+        <h1 clases="put3">Hello,{{ user.account }}!</h1>
 
-    <h2 class="put2"><a href="{{ url_for('collection') }}">My Collection</a></h2>
-    <form action="" method="post" name="post">
+        <h2 class="put2"><a href="{{ url_for('collection') }}">我的收藏”家“</a></h2>
+        {#    <form action="" method="post" name="post">#}
         {{ form.hidden_tag() }}
-        <table class="put2">
-            <tr>
-                <td>Say something:</td>
-                <td>{{ form.post(size = 30, maxlength = 140) }}</td>
-                <td>
-                    {% for error in form.errors.post %}
-                        <span style="color: red;">[{{ error }}]</span><br>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Post!"></td>
-                <td></td>
-            </tr>
-        </table>
-    </form>
-    {% for post in posts.items %}
-        {% include 'post.html' %}
-{% endfor %}
-    {% if posts.has_prev %}
-        <a class="put2" href="{{ url_for('index', page = posts.prev_num) }}"><< Newer posts</a>{% else %}<< Newer
-        posts{% endif %} |
-    {% if posts.has_next %}<a href="{{ url_for('index', page = posts.next_num) }}">Older posts >></a>{% else %}Older
-        posts >>{% endif %}
+        {#        <table class="put2">#}
+        {#            <tr>#}
+        {#                <td>几分钟发布过:</td>#}
+        {#                <td>{{ form.post(size = 30, maxlength = 140) }}</td>#}
+        {#                <td>#}
+        {#                    {% for error in form.errors.post %}#}
+        {#                        <span style="color: red;">[{{ error }}]</span><br>#}
+        {#                    {% endfor %}#}
+        {#                </td>#}
+        {#            </tr>#}
+        {#            <tr>#}
+        {#                <td></td>#}
+        {#                <td><input type="submit" value="Post!"></td>#}
+        {#                <td></td>#}
+        {#            </tr>#}
+        {#        </table>#}
+        {#    </form>#}
+
+        {% for post in posts.items %}
+            {% include 'post.html' %}
+        {% endfor %}
+
+        {% if posts.has_prev %}
+            <a class="put2" href="{{ url_for('index', page = posts.prev_num) }}"><< Newer posts</a> {% else %}
+            上一页   {% endif %}
+
+        |
+        {% if posts.has_next %}<a href="{{ url_for('index', page = posts.next_num) }}">Older posts >></a>{% else %}
+            下一页{% endif %}
+    </div>
 {% endblock %}

@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <td></td>
-                <td class="put1"><input type="submit" value="Post!"></td>
+                <td class="put1"><input type="submit" value="Add!"></td>
                 <td></td>
             </tr>
         </table>
@@ -32,7 +32,8 @@
                 <p class="put2">
                     <a href="{{ url_for('user', account = collection.owner.account) }}">{{ collection.owner.account }}</a>
                 <p class="put2"> {{ momentjs(collection.timestamp).fromNow() }}:</p>
-                <p class="put2"><strong>{{ collection.title }}</strong></p>
+                <a class="put2"
+                   href="{{ url_for('favorite',collection=collection) }}"><strong>{{ collection.title }}</strong></a>
                 {% if collection.description %}
                     <p class="put2"><strong>{{ collection.description }}</strong></p>
                 {% endif %}
