@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, g, url_for, session, request
+from flask import render_template, flash, redirect, g, url_for, session, request, make_response
 from app import app, db
 from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm
 
@@ -23,7 +23,7 @@ def index(page=1):
     user = g.user
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user)
+        post = Post(body=form.title.data, timestamp=datetime.utcnow(), author=g.user)
         db.session.add(post)
         db.session.commit()
         flash('Your post is now live!')
@@ -201,6 +201,40 @@ def star(post, user):
         # print(2)
     return render_template('star.html', title='star', user=user, collections=collections, post=post, form=form)
 
+
+@app.route('/new', methods=['GET', 'POST'])
+@login_required
+def new():
+    user = g.user
+    form = PostForm()
+    print(form.is_submitted())
+    print(form.validate())
+    if form.validate_on_submit():
+        # print(form.body.data)
+        # print(form.body.data)
+        # print(isinstance(form.body.data, unicode))
+        # body=form.body.data.decode('utf-8')
+        # print(body)
+        p = models.Post(user_id=g.user.id, title=form.title.data, body=form.body.data)
+        db.session.add(p)
+        db.session.commit()
+        flash("Your Post! have been saved.")
+        return redirect(url_for('index'))
+        # else:
+        # form.about_me.data = g.user.about_me
+    return render_template('new.html', title='new', user=user, form=form)
+
+
+# def gen_rnd_filename():
+#     filename_prefix = datetime.utcnow()
+#     return '%s%s' % filename_prefix % str(random.randrange(1000,100000))
+
+
+@app.route('/ckupload', methods=['POST'])
+def ckupload():
+    form = EditForm()
+    response = form.upload(endpoint=app)
+    return response
 
 # @oid.after_login
 # def after_login(resp):

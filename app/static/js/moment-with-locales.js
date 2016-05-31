@@ -398,7 +398,7 @@
         return locales[name];
     }
 
-    // This function will load locale and then set the global locale.  If
+    // This function will load locale and then set theg  global locale.  If
     // no arguments are passed in, it will simply return the current global
     // locale key.
     function locale_locales__getSetGlobalLocale(key, values) {

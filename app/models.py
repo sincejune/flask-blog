@@ -27,6 +27,10 @@ class User(db.Model):
     collections = db.relationship('Collection', backref='owner', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime)
+
+    location = db.Column(db.String(30))
+    job = db.Column(db.String(30))
+
     followed = db.relationship('User',
                                secondary=followers,
                                primaryjoin=(followers.c.follower_id == id),
@@ -65,7 +69,7 @@ class User(db.Model):
             followers.c.follower_id == self.id).order_by(Post.timestamp.desc())
 
     def own_collections(self):
-        return Collection.query.join().order_by(Collection.timestamp.desc())
+        return Collection.query.filter_by(user_id=self.id).order_by(Collection.timestamp.desc())
 
     def avatar(self, size):
         # 将self.email 修改成self.account
@@ -78,14 +82,14 @@ class User(db.Model):
 
 class Post(db.Model):
     id = db.Column('id', db.Integer, primary_key=True)
+    body = db.Column('body', db.String(20000))
     title = db.Column('title', db.String(30))
-    body = db.Column('body', db.String(3000))
-    timestamp = db.Column('timestamp', db.DateTime)
+    timestamp = db.Column('timestamp', db.DateTime, default=datetime.utcnow())
     user_id = db.Column('user_id', db.Integer, db.ForeignKey('user.id'))
-    update = db.Column('update', db.Integer)
+    update = db.Column('update', db.Integer, default=0)
 
     def __repr__(self):
-        return '<Post %r>' % self.body
+        return '<Post %r>' % self.title
 
 
 # class Favorite(db.Model):
