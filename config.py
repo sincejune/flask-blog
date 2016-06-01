@@ -8,3 +8,5 @@ SECRET_KEY = 'you are not a guy'
 
 # pagination
 POSTS_PER_PAGE = 3
+
+remap = '&nbsp;'

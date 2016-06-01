@@ -7,7 +7,8 @@ from .models import User, Post, Collection
 from flask.ext.login import login_user, current_user, logout_user, login_required
 
 from datetime import datetime
-from config import POSTS_PER_PAGE
+from config import POSTS_PER_PAGE, remap
+import re
 
 
 @app.route('/hello')
@@ -22,13 +23,16 @@ def hello():
 def index(page=1):
     user = g.user
     form = PostForm()
-    if form.validate_on_submit():
-        post = Post(body=form.title.data, timestamp=datetime.utcnow(), author=g.user)
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post is now live!')
-        return redirect('/index')
+    # if form.validate_on_submit():
+    #     body=re.sub(r'</?\w+[^>]*>','',form.body.data)
+    # post = Post(title=form.title.data, body=body, timestamp=datetime.utcnow(), author=g.user)
+    # db.session.add(post)
+    # db.session.commit()
+    # flash('Your post is now live!')
+    # return redirect('/index')
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
+    for post in posts.items:
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:20]
     return render_template("index.html", title="Home", user=user, form=form, posts=posts)
 
 
@@ -86,6 +90,8 @@ def user(account, page=1):
         flash('User ' + account + " not found.")
         return redirect('/index')
     posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
+    for post in posts.items:
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:20]
     return render_template('user.html', user=user, posts=posts)
 
 
@@ -235,6 +241,12 @@ def ckupload():
     form = EditForm()
     response = form.upload(endpoint=app)
     return response
+
+
+@app.route('/one/<id>')
+def one(id):
+    post = Post.query.filter_by(id=id).first()
+    return render_template('one.html', post=post)
 
 # @oid.after_login
 # def after_login(resp):
