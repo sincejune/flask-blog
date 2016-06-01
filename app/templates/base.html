@@ -36,7 +36,8 @@
                 <li class="active">
 
                     {% if g.user.is_authenticated() %}
-                        <a href="{{ url_for('user', account = g.user.account) }}">Your Profile<span class="sr-only">(current)</span></a>
+                        <a href="{{ url_for('user', account = g.user.account) }}">你的收藏夹<span
+                                class="sr-only">(current)</span></a>
                         </li>
                         <li class="active">
                             <a href="{{ url_for('new') }}">写博文<span class="sr-only">(current)</span></a></li>

@@ -79,3 +79,12 @@ div div img {
 a:hover {
     text-decoration: none;
 }
+
+.index_img {
+    background-image: url("../img/luk.jpg");
+    z-index: -1;
+    height: 1298px;
+    flaot: initial;
+    width: 480px;
+
+}

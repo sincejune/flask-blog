@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1 class="put">Edit Your Profile</h1>
+    <h1 class="put">编辑个人信息</h1>
     <form action="" method="post" name="edit">
         {{ form.hidden_tag() }}
         <table class="put">
             <tr>
-                <td>About yourself:</td>
+                <td>关于你自己:</td>
                 <td>{{ form.about_me(cols = 32, rows = 4) }}</td>
             </tr>
             <tr>
