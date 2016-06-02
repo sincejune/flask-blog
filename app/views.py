@@ -189,22 +189,21 @@ def favorite(collection, page=1):
 @login_required
 def star(post, user):
     collections = Collection.query.filter_by(user_id=user).all()
+    if collections is None:
+        flash("Your collection is None!")
+        return render_template()
     form = StarForm()
     form.star.choices = [(collection.id, collection.title) for collection in collections]
     # print(form.is_submitted())
     # print(form.validate())
     if form.validate_on_submit():
-        # print(1)
         print(form.star.data)
         c = Collection.query.filter_by(id=form.star.data).first()
         p = Post.query.filter_by(id=post).first()
         c.total += 1
         c.contents.append(p)
         db.session.add(c)
-        # db.session.add(c.coddntain(p))
         db.session.commit()
-        # else:?S?
-        # print(2)
     return render_template('star.html', title='star', user=user, collections=collections, post=post, form=form)
 
 

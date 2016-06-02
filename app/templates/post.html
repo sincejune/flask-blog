@@ -7,13 +7,13 @@
             . {{ momentjs(post.timestamp).fromNow() }}:</p>
             <a href="{{ url_for('one', id=post.id) }}"><p><strong>{{ post.title }}</strong></p></a>
             <p><strong>{{ post.body }}</strong></p>
-            <p><a href="{{ url_for('star', post=post.id, user=post.author.id) }}">添加收藏夹</a></p>
-            <script>$('#test2').on('click', function () {
+            <p id="test2"> 添加收藏夹</p>
+            <script>$("p#test2").on('click', function () {
                 layer.open({
-                    type: 1,
+                    type: 2,
                     area: ['600px', '360px'],
                     shadeClose: true, //点击遮罩关闭
-                    content: '\<\div style="padding:20px;">自定义内容\<\/div>'
+                    content: {{ url_for('star', post=post.id, user=post.author.id) }}
                 });
             });</script>
         </td>
