@@ -2,7 +2,7 @@
 
 from flask.ext.wtf import Form
 from flaskckeditor import CKEditor
-from wtforms import StringField, BooleanField, TextAreaField, RadioField, SubmitField
+from wtforms import StringField, BooleanField, TextAreaField, RadioField, SubmitField, PasswordField, validators
 from wtforms.validators import DataRequired
 
 
@@ -11,6 +11,12 @@ class LoginForm(Form):
     password = StringField('password', validators=[DataRequired()])
     remember_me = BooleanField('remember_me', default=False)
 
+
+class RegisterForm(Form):
+    account = StringField('account', validators=[DataRequired()])
+    password = PasswordField('New Password', validators=[DataRequired()])
+    confirm = PasswordField('Repeat Password')
+    remember_me = BooleanField('remember_me', default=False)
 
 class EditForm(Form):
     about_me = TextAreaField('about_me', validators=[DataRequired()])

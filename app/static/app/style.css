@@ -33,30 +33,6 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
 
-/*.put {*/
-/*position: relative;*/
-/*left: 700px;*/
-/*}*/
-
-/*.put1 {*/
-/*position: relative;*/
-/*left: 40%;*/
-/*font-size: 20px;*/
-/*font-family: serif;*/
-/*}*/
-
-/*.put2 {*/
-/*position: relative;*/
-/*left: 40%;*/
-/*font-size: 15px;*/
-/*}*/
-
-/*.put3 {*/
-/*position: relative;*/
-/*left: 40%;*/
-/*font-size: 40px;*/
-/*font-family: italic;*/
-/*}*/
 p span input {
     width: 257px;
 }
@@ -87,4 +63,27 @@ a:hover {
     flaot: initial;
     width: 480px;
 
+}
+
+.post_title {
+    color: blue;
+    text-decoration: underline;
+}
+
+.simple {
+    text-align: left;
+    padding: 5px;
+    border-bottom: 2px LightGrey solid;
+}
+
+.post {
+    padding: 20px;
+}
+
+.up {
+    display: inline;
+}
+
+.addCollection {
+    display: inline;
 }

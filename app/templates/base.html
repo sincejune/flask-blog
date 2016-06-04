@@ -8,6 +8,7 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/moment-with-locales.js"></script>
     <script src="/static/layer-v2.3/layer/layer.js"></script>
+    <link rel="stylesheet" href="/static/font-awesome-4.6.3/css/font-awesome.min.css">
     <script src="{{ url_for('static',filename='ckeditor/ckeditor.js') }}"></script>
     <script>moment.locale('zh-cn');</script>
     <link rel="stylesheet" href="/static/app/style.css">
@@ -48,6 +49,7 @@
                             <a href="{{ url_for('logout') }}">退出<span class="sr-only">(current)</span></a></li>
                     {% else %}
                         <a href="{{ url_for('login') }}">登录<span class="sr-only">(current)</span></a></li>
+                        <li><a href="{{ url_for('register') }}">注册<span class="sr-only">(current)</span></a></li>
                     {% endif %}
             </ul>
 
@@ -58,7 +60,7 @@
     {% if messages %}
         <ul>
             {% for message in messages %}
-                <li>{{ message }} </li>
+                <script>layer.msg('{{ message }}')</script>
             {% endfor %}
         </ul>
     {% endif %}

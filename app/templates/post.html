@@ -1,17 +1,9 @@
 <li class="list-group-item title">
-    <p><a href="{{ url_for('user', account = post.author.account) }}">{{ post.author.account }}</a>
-        . {{ momentjs(post.timestamp).fromNow() }}:</p>
-
-    <a href="{{ url_for('one', id=post.id) }}"><p><strong>{{ post.title }}</strong></p></a>
+    {#    <img src="{{ post.author.avatar(50) }}"/>#}
+    <div class="post">
+        <p class="simple"><a href="{{ url_for('user', account = post.author.account) }}">{{ post.author.account }}&nbsp&nbsp&nbsp于{{ momentjs(post.timestamp).fromNow() }}发布了文章:</a>
+        </p>
+        <p><a href="{{ url_for('one', id=post.id) }}" class="post_title">{{ post.title }}</a></p>
     <p>{{ post.body }}</p>
-    {#    <p id="test2"> 添加收藏夹</p>#}
-    {#    <script>$("p#test2").on('click', function () {#}
-    {#        layer.open({#}
-    {#            type: 2,#}
-    {#            area: ['600px', '360px'],#}
-    {#            shadeClose: true, //点击遮罩关闭#}
-    {#            content: {{ url_for('star', post=post.id, user=post.author.id) }}#}
-    {#        });#}
-    {#    });</script>#}
-    <img src="{{ post.author.avatar(50) }}"/>
+    </div>
 </li>

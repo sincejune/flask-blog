@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, g, url_for, session, request, make_response
 from app import app, db
-from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm
+from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm, RegisterForm
 
 from app import lm, models
 from .models import User, Post, Collection
@@ -37,38 +37,55 @@ def index(page=1):
 
 
 # remove openid
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/register', methods=['GET', 'POST'])
+def register():
     # make sure if user is logined
     # if g.user is not None:
     #     return redirect(('/index'))
-    form = LoginForm()
+    form = RegisterForm()
     if form.validate_on_submit():
+        if form.password.data != form.confirm.data:
+            flash('两次输入密码不一致，请重新输入！')
+            return redirect(url_for('register'))
         u = models.User.query.filter_by(account=form.account.data).first()
         print(u)
         if u is not None:
-            flash('account is already used!')
-            return redirect(url_for('login'))
+            flash('用户名已经被占用！')
+            return redirect(url_for('register'))
         if len(form.password.data) < 6:
-            flash('password is too short!')
-            return redirect(url_for('login'))
+            flash('密码太短!')
+            return redirect(url_for('register'))
         session['remember_me'] = form.remember_me.data
         new_user = models.User(account=form.account.data, password=form.password.data)
         db.session.add(new_user)
         db.session.commit()
-        flash('Login Successed ! Your account is"' + form.account.data + '",remember me =' + str(form.remember_me.data))
+        flash('注册成功! Your account is"' + form.account.data + '",remember me =' + str(form.remember_me.data))
         g.user = new_user
         # 使自己成为自己的关注者
         db.session.add(g.user.follow(g.user))
         # 触发器，创建新用户的时候添加第一条博客
-        p = models.Post(title='My first post!', body='My first post!!', timestamp=datetime.utcnow(), user_id=g.user.id,
+        p = models.Post(title='我的第一条博客', body='我的第一条博客！！', timestamp=datetime.utcnow(), user_id=g.user.id,
                         update=0)
         db.session.add(p)
         db.session.commit()
         login_user(new_user)
         return redirect('/index')
-    return render_template("login.html", title='Sign in', form=form)
+    return render_template("register.html", title='Sign in', form=form)
 
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        u = models.User.query.filter_by(account=form.account.data, password=form.password.data).first()
+        if u is None:
+            flash('账号或密码不正确')
+            return redirect(url_for('login'))
+        session['remember_me'] = form.remember_me.data
+        flash('登录成功')
+        login_user(u)
+        return redirect('/index')
+    return render_template("login.html", title='Sign in', form=form)
 
 @lm.user_loader
 def load_user(id):
