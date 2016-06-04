@@ -1,29 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1 class="put3">Hello,{{ user.account }}!</h1>
+    {#    <h1 class="put3">Hello,{{ user.account }}!</h1>#}
     <form action="" method="post" name="post">
         {{ form.hidden_tag() }}
-        <table class="put2">
-            <tr>
-                <td>新建收藏夹:</td>
-                <td>{{ form.title(size = 30, maxlength = 140) }}</td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>{{ form.description(size=30, maxlength=140) }}</td>
-                <td></td>
-                <td>
+        <p>新建收藏夹:</p>
+        <p>收藏夹名称：{{ form.title(size = 30, maxlength = 140) }}</p>
+        <p>收藏夹描述：{{ form.description(size=30, maxlength=140) }}</p>
                     {% for error in form.errors.post %}
                         <span style="color: red;">[{{ error }}]</span><br>
                     {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td class="put1"><input type="submit" value="Add!"></td>
-                <td></td>
-            </tr>
-        </table>
+        <p class="put1"><input type="submit" value="Add!"></p>
     </form>
     {% for collection in collections %}
         <table class="put2">
