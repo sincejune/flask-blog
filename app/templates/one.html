@@ -7,9 +7,20 @@
     <h2>{{ post.title }}</h2>
     <p>{{ post.body|safe }}</p>
     <hr>
-    <p class="up">up!</p>
-    <p class="addCollection"><a href="{{ url_for('star', post=post.id, user=post.author.id) }}">添加收藏夹</a></p>
-    <i class="fa fa-star"></i>
+    <p id='star' class="oneline"><a href="{{ url_for('star', post=post.id, user=post.author.id) }}">添加收藏夹</a></p>
+    <i id='func' class="fa fa-star oneline"></i>
+    <script>
+        $('#func').on('click', function () {
+            layer.open({
+                type: 2,
+                title: '我的收藏',
+                area: ['600px', '360px'],
+                shadeClose: true, //点击遮罩关闭
+                shift: 1,
+                content: '{{ url_for('star', post=post.id, user=post.author.id) }}'
+            });
+        });
+    </script>
     {#    <img src="{{ post.author.avatar(50) }}"/>#}
     {#    </div>#}
 {% endblock %}

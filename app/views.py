@@ -207,7 +207,7 @@ def favorite(collection, page=1):
 def star(post, user):
     collections = Collection.query.filter_by(user_id=user).all()
     if collections is None:
-        flash("Your collection is None!")
+        flash("你的收藏为空！")
         return render_template()
     form = StarForm()
     form.star.choices = [(collection.id, collection.title) for collection in collections]
@@ -221,6 +221,8 @@ def star(post, user):
         c.contents.append(p)
         db.session.add(c)
         db.session.commit()
+        flash("收藏添加成功")
+        render_template('star.html', title='star', user=user, collections=collections, post=post, form=form, flag=True)
     return render_template('star.html', title='star', user=user, collections=collections, post=post, form=form)
 
 

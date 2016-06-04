@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
 </head>
 <body>
+{% if flag %}
+    <script>
+        window.opener = "";
+        window.open('', '_self');
+        window.close();
+    </script>
+{% endif %}
 <form action="" method="post" name="post">
     {{ form.hidden_tag() }}
     <table>
         <tr>
-            {#                {% for subfield in form.starx %}#}
-            {#                <tr>#}
-            {#                 <td>{{ subfield }}</td>#}
-            {#                <td>{{ subfield.label }}</td>#}
-            {#                </tr>#}
-            {#                    {% endfor %}#}
             <td>{{ form.star }}</td>
         </tr>
         <tr>
