@@ -1,22 +1,17 @@
-<table>
-    <tr valign="top" style="float: left;margin-left: 633px; width: 600px;">
+<li class="list-group-item title">
+    <p><a href="{{ url_for('user', account = post.author.account) }}">{{ post.author.account }}</a>
+        . {{ momentjs(post.timestamp).fromNow() }}:</p>
 
-        <td style="margin-left: 26px; float: left;margin-right: 143px;"><p>
-            <a
-                href="{{ url_for('user', account = post.author.account) }}">{{ post.author.account }}</a>
-            . {{ momentjs(post.timestamp).fromNow() }}:</p>
-            <a href="{{ url_for('one', id=post.id) }}"><p><strong>{{ post.title }}</strong></p></a>
-            <p><strong>{{ post.body }}</strong></p>
-            <p id="test2"> 添加收藏夹</p>
-            <script>$("p#test2").on('click', function () {
-                layer.open({
-                    type: 2,
-                    area: ['600px', '360px'],
-                    shadeClose: true, //点击遮罩关闭
-                    content: {{ url_for('star', post=post.id, user=post.author.id) }}
-                });
-            });</script>
-        </td>
-        <td><img src="{{ post.author.avatar(50) }}"></td>
-    </tr>
-</table>
+    <a href="{{ url_for('one', id=post.id) }}"><p><strong>{{ post.title }}</strong></p></a>
+    <p>{{ post.body }}</p>
+    {#    <p id="test2"> 添加收藏夹</p>#}
+    {#    <script>$("p#test2").on('click', function () {#}
+    {#        layer.open({#}
+    {#            type: 2,#}
+    {#            area: ['600px', '360px'],#}
+    {#            shadeClose: true, //点击遮罩关闭#}
+    {#            content: {{ url_for('star', post=post.id, user=post.author.id) }}#}
+    {#        });#}
+    {#    });</script>#}
+    <img src="{{ post.author.avatar(50) }}"/>
+</li>

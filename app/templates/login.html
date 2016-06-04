@@ -3,8 +3,7 @@
     <script type="text/javascript">
 
 </script>
-    <div style="    min-height: 600px;">
-        <div class="login_img"><img src="../static/img/bgimg.jpg"/></div>
+    <div style="min-height: 600px;text-align: center;">
         <div style="width: 827px; float: right; margin-top: 100px;">
             <h1 class="put3">注册</h1>
             <form action="" method="post" name="login">
@@ -13,14 +12,14 @@
                     <br>
                     <span>用户名:</span><span>{{ form.account(size=60) }}</span><br>
                     <br>
-                    <span style="margin-left: 12px;">密码: </span><span
+                    <span style="margin-left: 12px;">密码:   </span><span
                         style=" margin-left: -2px;">{{ form.password(size=60) }}</span><br>
                     {% for error in form.account.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}<br>
                 </p>
                 <td></td>
-                <p class="put1" style=" margin-left: 45px;"><input type="submit" value="注册"></p>
+                <p class="put1" style="margin-left: 45px;"><input type="submit" value="注册"></p>
             </form>
         </div>
     </div>

@@ -32,7 +32,7 @@ def index(page=1):
     # return redirect('/index')
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     for post in posts.items:
-        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:20]
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:50]
     return render_template("index.html", title="Home", user=user, form=form, posts=posts)
 
 
