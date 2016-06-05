@@ -3,7 +3,7 @@ from app import app, db
 from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm, RegisterForm
 
 from app import lm, models
-from .models import User, Post, Collection
+from .models import User, Post, Collection, followers
 from flask.ext.login import login_user, current_user, logout_user, login_required
 
 from datetime import datetime
@@ -283,6 +283,16 @@ def randombox():
     return render_template('randombox.html', posts=slice)
 
 
+@app.route('/followers')
+def followers():
+    people = g.user.follower()
+    return render_template('followers.html', people=people)
+
+
+@app.route('/followees')
+def followees():
+    people = g.user.followees()
+    return render_template('followees.html', people=people)
 # @app.route('/up/<reader>/<post>')
 # def up(reader, post):/
 

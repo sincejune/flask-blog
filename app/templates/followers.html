@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>关注我的人</h2>
+    {% if people %}
+        {% for user in people %}
+            {% if user.id != g.user.id %}
+                <p class="simple"><a href="{{ url_for('user', account = user.account) }}">{{ user.account }}</a></p>
+            {% endif %}
+        {% endfor %}
+
+    {% endif %}
+{% endblock %}

@@ -51,6 +51,13 @@ class User(db.Model):
     def get_id(self):
         return str(self.id)
 
+    # 关注我的人，因为followers被占用，这里去掉s
+    def follower(self):
+        return self.followers
+
+    def followees(self):
+        return self.followed
+
     def follow(self, user):
         if not self.is_following(user):
             self.followed.append(user)

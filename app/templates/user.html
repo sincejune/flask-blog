@@ -14,6 +14,8 @@
     {% endif %}
     {% if user.id == g.user.id %}
         <a href="{{ url_for('edit') }}">编辑个人信息</a>
+        <a href="{{ url_for('followers') }}">关注我的人</a>
+        <a href="{{ url_for('followees') }}">我关注的人</a>
     {% elif not g.user.is_following(user) %}
         <a href="{{ url_for('follow', account = user.account) }}">关注</a>
     {% else %}
