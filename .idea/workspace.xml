@@ -4,9 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/app/views.py" description="    for post in posts.items:&#10;" line="34" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca0ecaa9-9bda-43d6-a813-902ca4f8e173" name="Default" comment="add some animate">
+    <list default="true" id="ca0ecaa9-9bda-43d6-a813-902ca4f8e173" name="Default" comment="update pages">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/forms.py" afterPath="$PROJECT_DIR$/app/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/ckeditor/CHANGES.md" afterPath="$PROJECT_DIR$/app/static/ckeditor/CHANGES.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/ckeditor/LICENSE.md" afterPath="$PROJECT_DIR$/app/static/ckeditor/LICENSE.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/ckeditor/contents.css" afterPath="$PROJECT_DIR$/app/static/ckeditor/contents.css" />
@@ -123,15 +122,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/ckeditor/skins/moono/editor_iequirks.css" afterPath="$PROJECT_DIR$/app/static/ckeditor/skins/moono/editor_iequirks.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/ckeditor/skins/moono/readme.md" afterPath="$PROJECT_DIR$/app/static/ckeditor/skins/moono/readme.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/static/ckeditor/styles.js" afterPath="$PROJECT_DIR$/app/static/ckeditor/styles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/base.html" afterPath="$PROJECT_DIR$/app/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/collection.html" afterPath="$PROJECT_DIR$/app/templates/collection.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/edit.html" afterPath="$PROJECT_DIR$/app/templates/edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/favorite.html" afterPath="$PROJECT_DIR$/app/templates/favorite.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/index.html" afterPath="$PROJECT_DIR$/app/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/new.html" afterPath="$PROJECT_DIR$/app/templates/new.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/one.html" afterPath="$PROJECT_DIR$/app/templates/one.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/star.html" afterPath="$PROJECT_DIR$/app/templates/star.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/templates/user.html" afterPath="$PROJECT_DIR$/app/templates/user.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views.py" afterPath="$PROJECT_DIR$/app/views.py" />
     </list>
     <ignored path="Blog.iws" />
@@ -147,7 +137,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Blog$test.coverage" NAME="test Coverage Results" MODIFIED="1464705093189" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Blog$Blog.coverage" NAME="Blog Coverage Results" MODIFIED="1465115646862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/Blog$Blog.coverage" NAME="Blog Coverage Results" MODIFIED="1465116957021" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -172,7 +162,7 @@
         <entry file="file://$PROJECT_DIR$/app/templates/favorite.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="76">
-              <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+              <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
               <folding>
                 <element signature="e#55#82#0#HTML" expanded="true" />
                 <element signature="e#83#112#0#HTML" expanded="true" />
@@ -207,7 +197,7 @@
         <entry file="file://$PROJECT_DIR$/app/templates/edit.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
-              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
+              <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -223,11 +213,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="125" column="61" selection-start-line="125" selection-start-column="61" selection-end-line="125" selection-end-column="61" />
+            <state relative-caret-position="517">
+              <caret line="217" column="19" selection-start-line="217" selection-start-column="19" selection-end-line="217" selection-end-column="19" />
               <folding>
                 <element signature="e#0#95#0" expanded="true" />
               </folding>
@@ -239,7 +229,7 @@
         <entry file="file://$PROJECT_DIR$/app/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="71" selection-end-column="13" />
+              <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="73" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -255,11 +245,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="456">
-              <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+            <state relative-caret-position="171">
+              <caret line="9" column="60" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
               <folding>
                 <element signature="e#8#38#0" expanded="true" />
               </folding>
@@ -319,10 +309,10 @@
         <option value="$PROJECT_DIR$/app/templates/star.html" />
         <option value="$PROJECT_DIR$/app/templates/new.html" />
         <option value="$PROJECT_DIR$/app/templates/one.html" />
-        <option value="$PROJECT_DIR$/app/views.py" />
         <option value="$PROJECT_DIR$/app/templates/user.html" />
         <option value="$PROJECT_DIR$/app/templates/edit.html" />
         <option value="$PROJECT_DIR$/app/forms.py" />
+        <option value="$PROJECT_DIR$/app/views.py" />
       </list>
     </option>
   </component>
@@ -946,7 +936,14 @@
       <option name="project" value="LOCAL" />
       <updated>1465107345827</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="update pages">
+      <created>1465116656486</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1465116656486</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -1029,14 +1026,14 @@
     <MESSAGE value="chinese support" />
     <MESSAGE value="rich text support" />
     <MESSAGE value="fix rich text" />
-    <MESSAGE value="update pages" />
     <MESSAGE value="update layer.js" />
     <MESSAGE value="change style" />
     <MESSAGE value="update [update function]" />
     <MESSAGE value="update [function update]" />
     <MESSAGE value="remove something table" />
     <MESSAGE value="add some animate" />
-    <option name="LAST_COMMIT_MESSAGE" value="add some animate" />
+    <MESSAGE value="update pages" />
+    <option name="LAST_COMMIT_MESSAGE" value="update pages" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -1359,7 +1356,7 @@
     <entry file="file://$PROJECT_DIR$/app/templates/favorite.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
+          <caret line="4" column="40" selection-start-line="4" selection-start-column="40" selection-end-line="4" selection-end-column="40" />
           <folding>
             <element signature="e#55#82#0#HTML" expanded="true" />
             <element signature="e#83#112#0#HTML" expanded="true" />
@@ -1385,14 +1382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/user.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
@@ -1401,20 +1390,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="125" column="61" selection-start-line="125" selection-start-column="61" selection-end-line="125" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="342">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="71" selection-end-column="13" />
+          <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="73" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1429,10 +1408,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
+        <state relative-caret-position="171">
+          <caret line="9" column="60" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
           <folding>
             <element signature="e#8#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/edit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="517">
+          <caret line="217" column="19" selection-start-line="217" selection-start-column="19" selection-end-line="217" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#95#0" expanded="true" />
           </folding>
         </state>
       </provider>

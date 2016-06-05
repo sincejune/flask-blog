@@ -126,6 +126,8 @@ def edit():
         return redirect(url_for('user', account=g.user.account))
     else:
         form.about_me.data = g.user.about_me
+        form.job.data = g.user.job
+        form.location.data = g.user.location
     return render_template('edit.html', form=form)
 
 
