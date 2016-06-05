@@ -6,24 +6,22 @@
         <p>新建收藏夹:</p>
         <p>收藏夹名称：{{ form.title(size = 30, maxlength = 140) }}</p>
         <p>收藏夹描述：{{ form.description(size=30, maxlength=140) }}</p>
-                    {% for error in form.errors.post %}
-                        <span style="color: red;">[{{ error }}]</span><br>
-                    {% endfor %}
+        {% for error in form.errors.post %}
+            <span style="color: red;">[{{ error }}]</span><br>
+        {% endfor %}
         <p class="put1"><input type="submit" value="Add!"></p>
     </form>
+    <h2>我的收藏夹</h2>
     {% for collection in collections %}
-        <table class="put2">
-            <tr valign="top">
-                <td class="put2"><img src="{{ collection.owner.avatar(50) }}"></td>
-                <p class="put2">
-                    <a href="{{ url_for('user', account = collection.owner.account) }}">{{ collection.owner.account }}</a>
-                <p class="put2"> {{ momentjs(collection.timestamp).fromNow() }}:</p>
-                <a class="put2"
-                   href="{{ url_for('favorite',collection=collection) }}"><strong>{{ collection.title }}</strong></a>
+        <li class="group-item title">
+            <div class="post">
+                <h3>
+                    <a href="{{ url_for('favorite',collection=collection) }}"><strong>{{ collection.title }}</strong></a>
+                </h3>
                 {% if collection.description %}
-                    <p class="put2"><strong>{{ collection.description }}</strong></p>
+                    <p class="put2">{{ collection.description }}</p>
                 {% endif %}
-            </tr>
-        </table>
+            </div>
+        </li>
     {% endfor %}
 {% endblock %}

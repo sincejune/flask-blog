@@ -1,20 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
-    <form method="post">
+    <form method="post" style='text-align: center;'>
         {{ form.hidden_tag() }}
-        <p style="text-align: center;">您的标题{{ form.title }}</p>
+        <p style="text-align: center;">您的标题： {{ form.title }}</p>
         <br>
         <br>
         {{ form.body(cols='20', rows='2', class='ckeditor') }}
         <!-- 替换脚本 -->
         <script type="text/javascript">
-            CKEDITOR.replace(
-                    "body", {
-                        filebrowserUploadUrl: '/ckupload/'
+            CKEDITOR.replace("body",
+                    {
+                        filebrowserUploadUrl: '/ckupload/',
+                        height: 800,
+                        width: 750
                     }
             );
         </script>
-        {#    <!---->#}
-        {{ form.submit }}
+        <br><br>
+        <p>{{ form.submit }}</p>
     </form>
 {% endblock %}

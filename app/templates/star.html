@@ -4,13 +4,6 @@
     <meta charset="UTF-8">
 </head>
 <body>
-{% if flag %}
-    <script>
-        window.opener = "";
-        window.open('', '_self');
-        window.close();
-    </script>
-{% endif %}
 <form action="" method="post" name="post">
     {{ form.hidden_tag() }}
     <table>
@@ -19,10 +12,19 @@
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Add!"></td>
+            <td><input id="s" type="submit" value="Add!"/></td>
             <td></td>
         </tr>
     </table>
 </form>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <script>layer.msg('{{ message }}')</script>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 </body>
 </html>

@@ -1,12 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
+    <div style="text-align: center;" style=" margin-top: -1273px;">
+        {% if not posts.total %}
+            <script>layer.alert('该收藏夹为空！')</script>
+        {% endif %}
     {% for post in posts.items %}
         {% include 'post.html' %}
+        <br><br>
     {% endfor %}
-
-    {% if posts.has_prev %}<a href="{{ url_for('index', page = posts.prev_num) }}"><< Newer posts</a>{% else %}<< Newer
-        posts{% endif %} |
-    {% if posts.has_next %}<a href="{{ url_for('index', page = posts.next_num) }}">Older posts >></a>{% else %}Older
-        posts >>{% endif %}
-
+        <br><br>
+        {% if posts.has_prev %}
+            <a class="put2" href="{{ url_for('index', page = posts.prev_num) }}"><< Newer posts</a> {% else %}
+            上一页   {% endif %}
+        |
+        {% if posts.has_next %}<a href="{{ url_for('index', page = posts.next_num) }}">Older posts >></a>{% else %}
+            下一页{% endif %}
+    </div>
 {% endblock %}

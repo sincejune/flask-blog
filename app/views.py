@@ -118,10 +118,12 @@ def edit():
     form = EditForm()
     if form.validate_on_submit():
         g.user.about_me = form.about_me.data
+        g.user.job = form.job.data
+        g.user.location = form.location.data
         db.session.add(g.user)
         db.session.commit()
         flash("Your changes have been saved.")
-        return redirect(url_for('edit'))
+        return redirect(url_for('user', account=g.user.account))
     else:
         form.about_me.data = g.user.about_me
     return render_template('edit.html', form=form)
@@ -205,7 +207,7 @@ def favorite(collection, page=1):
 @app.route('/star/<post>/<user>', methods=['GET', 'POST'])
 @login_required
 def star(post, user):
-    collections = Collection.query.filter_by(user_id=user).all()
+    collections = Collection.query.filter_by(user_id=g.user.id).all()
     if collections is None:
         flash("你的收藏为空！")
         return render_template()
@@ -222,7 +224,7 @@ def star(post, user):
         db.session.add(c)
         db.session.commit()
         flash("收藏添加成功")
-        render_template('star.html', title='star', user=user, collections=collections, post=post, form=form, flag=True)
+        render_template('star.html', title='star', user=user, collections=collections, post=post, form=form)
     return render_template('star.html', title='star', user=user, collections=collections, post=post, form=form)
 
 
@@ -242,7 +244,7 @@ def new():
         p = models.Post(user_id=g.user.id, title=form.title.data, body=form.body.data)
         db.session.add(p)
         db.session.commit()
-        flash("Your Post! have been saved.")
+        flash("你的博文已保存！")
         return redirect(url_for('index'))
         # else:
         # form.about_me.data = g.user.about_me

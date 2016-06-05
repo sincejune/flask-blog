@@ -2,7 +2,7 @@
 
 from flask.ext.wtf import Form
 from flaskckeditor import CKEditor
-from wtforms import StringField, BooleanField, TextAreaField, RadioField, SubmitField, PasswordField, validators
+from wtforms import StringField, BooleanField, TextAreaField, RadioField, SubmitField, PasswordField, IntegerField
 from wtforms.validators import DataRequired
 
 
@@ -20,6 +20,9 @@ class RegisterForm(Form):
 
 class EditForm(Form):
     about_me = TextAreaField('about_me', validators=[DataRequired()])
+    # age = IntegerField('age', validators=[DataRequired()])
+    location = StringField('location', validators=[DataRequired()])
+    job = StringField('job', validators=[DataRequired()])
 
 
 class PostForm(Form):

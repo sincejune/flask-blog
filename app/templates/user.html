@@ -2,7 +2,13 @@
 {% block content %}
     <img src="{{ user.avatar(128) }}">
     <h1>用户名: {{ user.account }}</h1>
-    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+    {% if user.about_me %}<p>关于：{{ user.about_me }}</p>{% endif %}
+    {% if user.job %}
+        <p>职业：{{ user.job }}</p>
+    {% endif %}
+    {% if user.location %}
+        <p>位置：{{ user.location }}</p>
+    {% endif %}
     {% if user.last_seen %}
         <p><em>上次登录: {{ momentjs(user.last_seen).calendar() }}</em></p>
     {% endif %}
