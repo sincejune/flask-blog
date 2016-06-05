@@ -1,9 +1,9 @@
-<li class="list-group-item title">
+<li class="group-item title">
     {#    <img src="{{ post.author.avatar(50) }}"/>#}
     <div class="post">
         <p class="simple"><a href="{{ url_for('user', account = post.author.account) }}">{{ post.author.account }}&nbsp&nbsp&nbsp于{{ momentjs(post.timestamp).fromNow() }}发布了文章:</a>
         </p>
         <p><a href="{{ url_for('one', id=post.id) }}" class="post_title">{{ post.title }}</a></p>
-    <p>{{ post.body }}</p>
+        <p>{{ post.body }}</p>
     </div>
 </li>

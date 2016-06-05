@@ -33,4 +33,6 @@ CKEDITOR.editorConfig = function (config) {
     config.removeDialogTabs = 'link:advanced';
 
     config.entities_latin = false;
+    config.width = 800;
+    config.height = 800;
 };

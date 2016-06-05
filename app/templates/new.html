@@ -2,8 +2,10 @@
 {% block content %}
     <form method="post">
         {{ form.hidden_tag() }}
-        {{ form.title }}
-        {{ form.body(class='ckeditor') }}
+        <p style="text-align: center;">您的标题{{ form.title }}</p>
+        <br>
+        <br>
+        {{ form.body(cols='20', rows='2', class='ckeditor') }}
         <!-- 替换脚本 -->
         <script type="text/javascript">
             CKEDITOR.replace(

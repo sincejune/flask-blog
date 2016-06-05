@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    {#    <div style="text-align: center;">#}
     <p><a href="{{ url_for('user', account = post.author.account) }}">{{ post.author.account }}</a>
                     . {{ momentjs(post.timestamp).fromNow() }}:</p>
 
@@ -9,6 +8,7 @@
     <hr>
     <p id='star' class="oneline"><a href="{{ url_for('star', post=post.id, user=post.author.id) }}">添加收藏夹</a></p>
     <i id='func' class="fa fa-star oneline"></i>
+    {#    <i id="up" class="fa fa-thumbs-up oneline">&nbsp{{ post.update }}</i>#}
     <script>
         $('#func').on('click', function () {
             layer.open({

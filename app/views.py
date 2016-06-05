@@ -8,7 +8,7 @@ from flask.ext.login import login_user, current_user, logout_user, login_require
 
 from datetime import datetime
 from config import POSTS_PER_PAGE, remap
-import re
+import re, random
 
 
 @app.route('/hello')
@@ -265,6 +265,23 @@ def ckupload():
 def one(id):
     post = Post.query.filter_by(id=id).first()
     return render_template('one.html', post=post)
+
+
+@app.route('/randombox')
+# @app.route('/square/<int:page>')
+def randombox():
+    # posts = models.Post().all()
+    posts = Post.query.all()
+    for post in posts:
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:50]
+    # db.session.commit()
+    slice = random.sample(posts, 5)
+    return render_template('randombox.html', posts=slice)
+
+
+# @app.route('/up/<reader>/<post>')
+# def up(reader, post):/
+
 
 # @oid.after_login
 # def after_login(resp):
