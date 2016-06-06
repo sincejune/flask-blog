@@ -108,7 +108,7 @@ def user(account, page=1):
         return redirect('/index')
     posts = user.posts.paginate(page, POSTS_PER_PAGE, False)
     for post in posts.items:
-        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:20]
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:50]
     return render_template('user.html', user=user, posts=posts)
 
 
@@ -203,6 +203,8 @@ def collection():
 def favorite(collection, page=1):
     c = Collection.query.filter_by(id=int(collection)).first()
     posts = c.within_posts().paginate(page, POSTS_PER_PAGE, False)
+    for post in posts.items:
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:50]
     return render_template("favorite.html", title="Home", user=user, posts=posts)
 
 
