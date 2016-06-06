@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, g, url_for, session, request, make_response
 from app import app, db
-from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm, RegisterForm
+from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm, RegisterForm, SearchForm
 
 from app import lm, models
 from .models import User, Post, Collection, followers
@@ -270,7 +270,7 @@ def ckupload():
 @app.route('/one/<id>')
 def one(id):
     post = Post.query.filter_by(id=id).first()
-    return render_template('one.html', post=post)
+    return render_template('one.html', post=post, user=g.user)
 
 
 @app.route('/randombox')
@@ -295,6 +295,40 @@ def followers():
 def followees():
     people = g.user.followees()
     return render_template('followees.html', people=people)
+
+
+@app.route('/delete/<int:post>', methods=['GET', 'POST'])
+def delete(post):
+    user = g.user
+    p = Post.query.filter_by(id=post).first()
+    db.session.delete(p)
+    db.session.commit()
+    flash('博文删除成功！')
+    form = PostForm()
+    posts = g.user.followed_posts().paginate(1, POSTS_PER_PAGE, False)
+    for post in posts.items:
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')[0:50]
+    return render_template("index.html", title="Home", user=user, form=form, posts=posts)
+
+
+@app.route('/search/<code>', methods=['GET', 'POST'])
+def search(code):
+    user = g.user
+    users = User.query.filter(User.account.like('%' + code + '%'))
+    posts = Post.query.filter(Post.body.like('%' + code + '%'))
+    for post in posts:
+        post.body = re.sub(r'</?\w+[^>]*>', '', post.body).replace(remap, '')
+    return render_template('search.html', users=users, posts=posts)
+
+
+@app.route('/update/<int:post>', methods=['GET', 'POST'])
+def update(post):
+    user = g.user
+    p = Post.query.filter_by(id=post).first()
+    p.update += 1
+    db.session.add(p)
+    db.session.commit()
+    return '更新成功'
 # @app.route('/up/<reader>/<post>')
 # def up(reader, post):/
 

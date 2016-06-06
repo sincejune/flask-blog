@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#user" data-toggle="tab">用户</a>
+        </li>
+        <li><a href="#post" data-toggle="tab">文章</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="user">
+            {% if users == None %}
+                <script>layer.alert("没有匹配的用户");</script>
+                <p>没有匹配的用户</p>
+            {% endif %}
+            {% for user in users %}
+                {#            {% if user.id != g.user.id %}#}
+                <br>
+                <p class="simple"><a href="{{ url_for('user', account = user.account) }}">{{ user.account }}</a></p>
+                {#            {% endif %}#}
+            {% endfor %}
+        </div>
+        <div class="tab-pane fade" id="post">
+            {% if posts == None %}
+                <script>layer.alert("没有匹配的文章");</script>
+                <p>没有匹配的文章</p>
+            {% endif %}
+            {% for post in posts %}
+                {% include 'post.html' %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+

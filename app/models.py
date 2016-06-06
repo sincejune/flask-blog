@@ -126,7 +126,8 @@ class Collection(db.Model):
                                primaryjoin=(favorites.c.collection_id == id),
                                secondaryjoin=(favorites.c.post_id == Post.id),
                                backref=db.backref('favorby', lazy='dynamic'),
-                               lazy='dynamic'
+                               lazy='dynamic',
+                               cascade="delete, delete-orphan", single_parent=True, passive_deletes=True
                                )
 
     # followed = db.relationship('User',

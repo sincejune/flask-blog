@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="zh_CN" xmlns="http://www.w3.org/1999/html">
 <head>
     <link rel="stylesheet" href="/static/bootstrap-3.3.5-dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/app/main.css"/>
@@ -19,6 +19,54 @@
     {% else %}
         <title>S-Blog</title>
     {% endif %}
+    <canvas style="position: absolute; left: 0; height: 100%; width:100%;z-index: -1;"></canvas>
+    <script>
+        document.addEventListener('touchmove', function (e) {
+            e.preventDefault()
+        })
+        var c = document.getElementsByTagName('canvas')[0],
+                x = c.getContext('2d'),
+                pr = window.devicePixelRatio || 1,
+                w = window.innerWidth,
+                h = window.innerHeight,
+                f = 90,
+                q,
+                m = Math,
+                r = 0,
+                u = m.PI * 2,
+                v = m.cos,
+                z = m.random
+        c.width = w * pr
+        c.height = h * pr
+        x.scale(pr, pr)
+        x.globalAlpha = 0.6
+        function i() {
+            x.clearRect(0, 0, w, h)
+            q = [{x: 0, y: h * .7 + f}, {x: 0, y: h * .7 - f}]
+            while (q[1].x < w + f) d(q[0], q[1])
+        }
+        function d(i, j) {
+            x.beginPath()
+            x.moveTo(i.x, i.y)
+            x.lineTo(j.x, j.y)
+            var k = j.x + (z() * 2 - 0.25) * f,
+                    n = y(j.y)
+            x.lineTo(k, n)
+            x.closePath()
+            r -= u / -50
+            x.fillStyle = '#' + (v(r) * 127 + 128 << 16 | v(r + u / 3) * 127 + 128 << 8 | v(r + u / 3 * 2) * 127 + 128).toString(16)
+            x.fill()
+            q[0] = q[1]
+            q[1] = {x: k, y: n}
+        }
+        function y(p) {
+            var t = p + (z() * 2 - 1.1) * f
+            return (t > h || t < 0) ? y(p) : t
+        }
+        document.onclick = i
+        document.ontouchstart = i
+        i()
+    </script>
 </head>
 
 <body class="body">
@@ -34,7 +82,24 @@
             </button>
             <a class="navbar-brand" href="/index">主页</a>
             <a class="navbar-brand" href="/randombox">广场</a>
-
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input id="mycode" type="text" class="form-control" placeholder="Search">
+                </div>
+                <p class="btn btn-default" onclick="func()">搜索</p>
+                <script>
+                    function func() {
+                        var text = document.getElementById('mycode').value;
+                        if (text == "") {
+                            layer.msg('搜索内容为空');
+                            return;
+                        }
+                        uri = 'http://localhost:5000' + '{{ url_for('search', code=text) }}';
+                        window.location.href = uri + text;
+                        {#                        $.post('http://localhost:5000' + '{{ url_for('search',code=text) }}');#}
+                    }
+                </script>
+            </form>
         </div>
 
 
@@ -42,21 +107,21 @@
             <ul class="nav navbar-nav">
 
 
-                    {% if g.user.is_authenticated() %}
-                        <li class="active">
+                {% if g.user.is_authenticated() %}
+                    <li class="active">
                         <a href="{{ url_for('user', account = g.user.account) }}">我的个人信息<span
                                 class="sr-only">(current)</span></a></li>
 
-                        <li class="active"><a href="{{ url_for('collection') }}">我的收藏夹<span
-                                class="sr-only">(current)</span></a></li>
-                        <li class="active">
-                            <a href="{{ url_for('new') }}">写博文<span class="sr-only">(current)</span></a></li>
-                        <li class="active">
-                            <a href="{{ url_for('logout') }}">退出<span class="sr-only">(current)</span></a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('login') }}">登录<span class="sr-only">(current)</span></a></li>
-                        <li><a href="{{ url_for('register') }}">注册<span class="sr-only">(current)</span></a></li>
-                    {% endif %}
+                    <li class="active"><a href="{{ url_for('collection') }}">我的收藏夹<span
+                            class="sr-only">(current)</span></a></li>
+                    <li class="active">
+                        <a href="{{ url_for('new') }}">写博文<span class="sr-only">(current)</span></a></li>
+                    <li class="active">
+                        <a href="{{ url_for('logout') }}">退出<span class="sr-only">(current)</span></a></li>
+                {% else %}
+                    <li><a href="{{ url_for('login') }}">登录<span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{ url_for('register') }}">注册<span class="sr-only">(current)</span></a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

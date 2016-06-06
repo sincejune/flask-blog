@@ -6,6 +6,9 @@ from wtforms import StringField, BooleanField, TextAreaField, RadioField, Submit
 from wtforms.validators import DataRequired
 
 
+class SearchForm(Form):
+    code = StringField('code', validators=[DataRequired()])
+
 class LoginForm(Form):
     account = StringField('account', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
