@@ -4,7 +4,7 @@ from .forms import LoginForm, EditForm, PostForm, CollectionForm, StarForm, Regi
 
 from app import lm, models
 from .models import User, Post, Collection, followers
-from flask.ext.login import login_user, current_user, logout_user, login_required
+from flask_login import login_user, current_user, logout_user, login_required
 
 from datetime import datetime
 from config import POSTS_PER_PAGE, remap
@@ -357,7 +357,7 @@ def update(post):
 @app.before_request
 def before_request():
     g.user = current_user
-    if g.user.is_authenticated():
-        g.user.last_seen = datetime.utcnow()
+    if g.user.is_authenticated:
+        # g.user.last_seen = datetime.utcnow()
         db.session.add(g.user)
         db.session.commit()

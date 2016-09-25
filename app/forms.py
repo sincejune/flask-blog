@@ -1,7 +1,7 @@
 # 创建表单
 
-from flask.ext.wtf import Form
-from flaskckeditor import CKEditor
+from flask_wtf import Form
+# from flask.ckeditor import CKEditor
 from wtforms import StringField, BooleanField, TextAreaField, RadioField, SubmitField, PasswordField, IntegerField
 from wtforms.validators import DataRequired
 

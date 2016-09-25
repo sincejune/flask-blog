@@ -107,7 +107,7 @@
             <ul class="nav navbar-nav">
 
 
-                {% if g.user.is_authenticated() %}
+                {% if g.user.is_authenticated %}
                     <li class="active">
                         <a href="{{ url_for('user', account = g.user.account) }}">我的个人信息<span
                                 class="sr-only">(current)</span></a></li>
